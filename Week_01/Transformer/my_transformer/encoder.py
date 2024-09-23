@@ -21,3 +21,18 @@ class TransformerEncoderLayer(nn.Module):
     def forward(self, x: Tensor) -> Tensor:
         mask = None
         #TODO
+        # Multi-head attention block
+        attn_x = self.self_attn(x, x, x, mask)
+        x = self.residual1(x, self.dropout1(attn_x))
+        x = self.norm1(x)
+
+        # Feed Forward block
+        ff_x = self.ff(x)
+        x = self.residual2(x, self.dropout2(ff_x))
+        x = self.norm2(x)
+
+        return x
+
+
+
+
