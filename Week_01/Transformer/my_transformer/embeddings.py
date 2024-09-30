@@ -22,9 +22,8 @@ class PositionEmbedding(nn.Module):
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
 
-        # register_buffer을 이용해서 학습은 안되지만, model의 state에서 움직이도록 할 수 있다.
+        # register_buffer: 학습은 안되지만, model의 state에서 움직이도록 할 수 있다.
         self.register_buffer('position_encoding', pe.unsqueeze(0))  # shape; (1, max_len, d_model). 
-        # batch 차원을 만들어줘야 나중에 tokenembedding 결과와 더할때 broadcasting 가능
 
 
     def forward(self, x: Tensor) -> Tensor:

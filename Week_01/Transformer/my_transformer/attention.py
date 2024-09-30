@@ -34,7 +34,7 @@ class ScaledDotProductAttention(nn.Module):
         # q shape; (batch_size, n_heads, sequence_length, d_k)
 
         d_k = q.shape[-1]
-        scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)  # shape; (batch, heads, seq_length, seq_length)
+        scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)  # shape; (batch, heads, seq_length, seq_length) - energy matrics
 
         if mask is not None:
             scores = scores.masked_fill(mask==0, float('-inf'))
