@@ -61,12 +61,12 @@ class Darknet(nn.Module):
         for x in architecture:
             if type(x) == tuple:  
                 kernel_size, out_channels, stride, padding = x
-                layers.append(CNNBlock(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size))
+                layers.append(CNNBlock(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, stride=stride, padding=padding))
                 in_channels = out_channels
 
             elif type(x) == str: 
-                # hint: maxpoolinglayer일 경우입니다!
-                layers.append(nn.MaxPool2d(kernel_size=(2, 2), stride=(2, 2)))
+                if x == "M":
+                    layers.append(nn.MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0))  # MaxPooling
 
             elif type(x) == list: 
                 conv1, conv2, num_repeats = x
@@ -77,7 +77,7 @@ class Darknet(nn.Module):
                     kernel_size, out_channels, stride, padding = conv2
                     layers.append(CNNBlock(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding))
                     in_channels = out_channels
-                
+
         return nn.Sequential(*layers)
 
 
