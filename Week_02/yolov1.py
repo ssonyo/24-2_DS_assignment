@@ -48,14 +48,14 @@ class Yolov1(nn.Module):
         final_cnn_out_channel = 1024
         layer_output = 4096
 
-        ## TODO
-        # fully connected layer(nn.Sequential 이용해서 구현해주세요!)
-        
+        # 수정: Darknet 출력 크기를 기반으로 flatten 크기를 조정
+        flatten_dim = final_cnn_out_channel * S * S  # S=7이라면 1024*7*7=50176, S=14이라면 1024*14*14=200704 등
+
         return nn.Sequential(
-            nn.Linear(final_cnn_out_channel * S * S, layer_output),  # 입력: 1024 x S x S -> 출력: 4096
+            nn.Linear(flatten_dim, layer_output),
             nn.Dropout(dropout),
             nn.LeakyReLU(leakyReLU),
-            nn.Linear(layer_output, S * S * (C + B * 5))  # 최종 출력 크기: S x S x (C + B x 5)
+            nn.Linear(layer_output, S * S * (C + B * 5))
         )
 
 def test():
