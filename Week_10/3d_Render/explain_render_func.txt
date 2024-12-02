@@ -1,0 +1,21 @@
+Describe your explanation about below simple rendering functions.
+
+1. barycentric_coords: p가 삼각형 내부에 있는 점인지 판별, 위치를 Barycentric 좌표계로 표현 (각 꼭짓점에서의 거리비)
+
+2. bounding_box: 삼각형의 bounding box 반환
+
+3. scaled_vertices: 화면 크기에 맞게 vertex scaling (3d to 2d)
+
+4. scaled_texture_vertices: 텍스처 좌표를 텍스처 이미지 크기에 맞게 스케일링
+
+5. normal_vectors: 삼각형 각 정점에 대한 normal vector 구함 
+
+6. render_line: 두 점을 잇는 선을 그림
+
+7. draw_triangle: 삼각형의 외곽선 그림
+
+8. shade_triangle_texture: 삼각형을 단색 음영처리
+
+9. shade_triangle: 삼각형을 텍스처로 음영처리
+
+10. render_shaded: 삼각형 면을 순회하며 음영처리, 텍스처 매핑으로 각각의 삼각형 그림
